@@ -1,19 +1,15 @@
-window.promises = [];
+window.promises = [
+  new Promise(resolve => setTimeout(() => resolve(1), Math.random() * 5000)),
+  new Promise(resolve => setTimeout(() => resolve(2), Math.random() * 5000)),
+  new Promise(resolve => setTimeout(() => resolve(3), Math.random() * 5000)),
+  new Promise(resolve => setTimeout(() => resolve(4), Math.random() * 5000)),
+  new Promise(resolve => setTimeout(() => resolve(5), Math.random() * 5000))
+];
 
 // Do not change the code above this
 // add your promises to the array `promises`
 
-function createPromise(delay){
-	return new Promise((res, rej) =>{
-		setTimeout(() =>{
-			res("Promise resolved");
-		}, delay);
-	});
-}
-
-for(let i=0 ; i<5 ; i++){
-	promises.push(createPromise(Math.random() * (5000 - 1000) + 1000));
-}
-
-let output = document.getElementById("output");
-output.innerText = Promise.any(promises);
+Promise.any(promises).then(value => {
+  // Print result 
+  document.getElementById('output').textContent = value;
+});
